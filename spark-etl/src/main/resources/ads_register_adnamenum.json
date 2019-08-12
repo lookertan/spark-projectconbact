@@ -1,0 +1,72 @@
+{
+  "job": {
+    "setting": {
+      "speed": {
+        "channel": 3
+      }
+    },
+    "content": [
+      {
+        "reader": {
+          "name": "hdfsreader",
+          "parameter": {
+            "path": "/data_warehouse/ads.db/ads_register_adnamenum/*",
+            "defaultFS": "hdfs://Hadoop103:9000",
+            "column": [
+              {
+                "index": 0,
+                "type": "string"
+              },
+              {
+                "index": 1,
+                "type": "long"
+              }, {
+                "type": "string",
+                "value": "$dt"
+              },
+              {
+
+                "type": "string",
+                "value": "$dn"
+              }
+            ],
+            "fileType": "csv",
+            "encoding": "UTF-8",
+            "fieldDelimiter": "\t"
+          }
+
+        },
+        "writer": {
+          "name": "mysqlwriter",
+          "parameter": {
+            "writeMode": "insert",
+            "username": "root",
+            "password": "123456",
+            "column": [
+              "adname",
+              "num",
+              "dt",
+              "dn"
+            ],
+            "session": [
+              "set session sql_mode='ANSI'"
+            ],
+            "preSql": [
+              ""
+            ],
+            "connection": [
+              {
+                "jdbcUrl": "jdbc:mysql://hadoop102:3306/onlineDucation?useUnicode=true&characterEncoding=utf8",
+                "table": [
+                  "ads_register_adnamenum"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}
+
+

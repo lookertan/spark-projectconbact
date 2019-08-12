@@ -1,0 +1,83 @@
+{
+  "job": {
+    "setting": {
+      "speed": {
+        "channel": 3
+      }
+    },
+    "content": [
+      {
+        "reader": {
+          "name": "hdfsreader",
+          "parameter": {
+            "path": "/data_warehouse/ads.db/ads_paper_scoresegment_user/*",
+            "defaultFS": "hdfs://Hadoop103:9000",
+            "column": [
+              {
+                "index": 0,
+                "type": "long"
+              },
+              {
+                "index": 1,
+                "type": "string"
+              },
+              {
+                "index": 2,
+                "type": "string"
+              },
+              {
+                "index": 3,
+                "type": "string"
+              },
+              {
+                "type": "string",
+                "value": "$dt"
+              },
+              {
+
+                "type": "string",
+                "value": "$dn"
+              }
+            ],
+            "fileType": "csv",
+            "encoding": "UTF-8",
+            "fieldDelimiter": "\t"
+          }
+
+        },
+        "writer": {
+          "name": "mysqlwriter",
+          "parameter": {
+            "writeMode": "insert",
+            "username": "root",
+            "password": "123456",
+            "column": [
+              "paperviewid",
+              "paperviewname",
+              "score_segment",
+              "userids",
+              "dt",
+              "dn"
+            ],
+            "session": [
+              "set session sql_mode='ANSI'"
+            ],
+            "preSql": [
+              ""
+            ],
+            "connection": [
+              {
+                "jdbcUrl": "jdbc:mysql://hadoop102:3306/onlineDucation?useUnicode=true&characterEncoding=utf8",
+                "table": [
+                  "ads_paper_scoresegment_user"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}
+
+

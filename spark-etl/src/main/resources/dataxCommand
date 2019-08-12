@@ -1,0 +1,3 @@
+python bin/datax.py  job/ads_low3_userdetail.json
+-p"-Ddt=20190722 -Ddn=webA"
+ads_top3_userdetail.json

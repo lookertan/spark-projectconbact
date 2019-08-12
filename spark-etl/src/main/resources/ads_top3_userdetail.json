@@ -1,0 +1,114 @@
+{
+  "job": {
+    "setting": {
+      "speed": {
+        "channel": 3
+      }
+    },
+    "content": [
+      {
+        "reader": {
+          "name": "hdfsreader",
+          "parameter": {
+            "path": "/data_warehouse/ads.db/ads_top3_userdetail/*",
+            "defaultFS": "hdfs://Hadoop103:9000",
+            "column": [
+              {
+                "index": 0,
+                "type": "long"
+              },
+              {
+                "index": 1,
+                "type": "long"
+              },              {
+                "index": 2,
+                "type": "string"
+              },              {
+                "index": 3,
+                "type": "string"
+              },              {
+                "index": 4,
+                "type": "string"
+              },              {
+                "index": 5,
+                "type": "string"
+              },              {
+                "index": 6,
+                "type": "string"
+              },{
+                "index": 7,
+                "type": "string"
+              },{
+                "index": 8,
+                "type": "string"
+              },{
+                "index": 9,
+                "type": "string"
+              },
+              {
+                "index": 10,
+                "type": "double"
+              },   {
+                "index": 11,
+                "type": "long"
+              },
+
+              {
+                "type": "string",
+                "value": "$dt"
+              },
+              {
+                "type": "string",
+                "value": "$dn"
+              }
+            ],
+            "fileType": "text",
+            "encoding": "UTF-8",
+            "fieldDelimiter": "\t"
+          }
+
+        },
+        "writer": {
+          "name": "mysqlwriter",
+          "parameter": {
+            "writeMode": "insert",
+            "username": "root",
+            "password": "123456",
+            "column": [
+              "userid",
+              "paperviewid",
+              "paperviewname",
+              "chaptername",
+              "pointname",
+              "sitecoursename",
+              "coursename",
+              "majorname",
+              "shortname",
+              "papername",
+              "score",
+              "rk",
+              "dt",
+              "dn"
+            ],
+            "session": [
+              "set session sql_mode='ANSI'"
+            ],
+            "preSql": [
+              ""
+            ],
+            "connection": [
+              {
+                "jdbcUrl": "jdbc:mysql://hadoop102:3306/onlineDucation?useUnicode=true&characterEncoding=utf8",
+                "table": [
+                  "ads_top3_userdetail"
+                ]
+              }
+            ]
+          }
+        }
+      }
+    ]
+  }
+}
+
+
